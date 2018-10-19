@@ -1,4 +1,17 @@
 language: node_js
 node_js:
   - "node"
-sudo: false
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t docker-ci-aws .
+script:
+  - docker run docker-ci-aws
+after_success:
+  - echo "After success"
+  - npm run test
+    # 使用 curl 測試 docker 是否有順利執行 node
+  - docker run -d -p 3000:3000 docker-ci-aws; sleep 10
+  - curl --retry 10 --retry-delay 5 -v http://localhost:3000
+  - echo "Finish..."
