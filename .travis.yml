@@ -13,4 +13,13 @@ script:
   - docker run -d -p 3000:3000 docker-ci-aws; sleep 10
   - curl --retry 10 --retry-delay 5 -v http://localhost:3000
   - echo "Finish..."
-  
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+  region: "us-east-1"  
+  app: "EXP-app-name"
+  env: "EXP-app-environment"
+  bucket_name: "docker-ci-aws"
