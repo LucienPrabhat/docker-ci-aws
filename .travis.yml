@@ -20,6 +20,9 @@ deploy:
   secret_access_key:
     secure: $AWS_SECRET_KEY
   region: "us-east-1"  
-  app: "EXP-app-name"
-  env: "EXP-app-environment"
-  bucket_name: "docker-ci-aws"
+  app: "new-try"
+  env: "NewTry-env"
+  bucket_name: "elasticbeanstalk-us-east-1-885661614159"
+  bucket_path: "docker"
+  on:
+    branch: master
